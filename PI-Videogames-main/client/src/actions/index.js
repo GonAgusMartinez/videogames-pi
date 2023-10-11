@@ -28,21 +28,23 @@ export const createVideoGame = (formData) => {
   };
 };
 
-export const fetchVideoGameDetail = async (id) => {
-  try {
-    const response = await axios.get(`https://api.rawg.io/api/games/${id}`, {
-    });
+export const fetchVideoGameDetail = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`https://api.rawg.io/api/games/${id}`);
 
-    if (response.status === 200) {
-      const videoGameData = response.data;
-
-
-      return videoGameData;
-    } else {
-      throw new Error('Error al obtener los detalles del juego');
+      if (response.status === 200) {
+        const videoGameData = response.data;
+        dispatch({
+          type: 'FETCH_VIDEOGAME_DETAIL',
+          payload: videoGameData,
+        });
+      } else {
+        throw new Error('Error al obtener los detalles del juego');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud de la API', error);
+      throw error;
     }
-  } catch (error) {
-    console.error('Error en la solicitud de la api', error);
-    throw error;
-  }
+  };
 };
