@@ -15,7 +15,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         videoGames: [...state.videoGames, action.payload],
       };
-    case 'GET_VIDEOGAME_DETAIL':
+    case 'FETCH_VIDEOGAME_DETAIL': 
       return {
         ...state,
         videoGameDetail: action.payload,
