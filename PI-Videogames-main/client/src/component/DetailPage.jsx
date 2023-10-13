@@ -5,9 +5,10 @@ import { fetchVideoGameDetail } from '../actions';
 const DetailPage = ({ match }) => {
   const dispatch = useDispatch();
   const { videoGameDetail, loading, error } = useSelector((state) => state.videoGameDetail);
+  const { id, name, image, platforms, description, releaseDate, rating, genres } = videoGameDetail || {};
 
   useEffect(() => {
-    const videoGameId = match.params.id; 
+    const videoGameId = match.params.id;
     dispatch(fetchVideoGameDetail(videoGameId));
   }, [dispatch, match.params.id]);
 
@@ -22,17 +23,6 @@ const DetailPage = ({ match }) => {
   if (!videoGameDetail) {
     return <div>No se encontraron detalles del juego.</div>;
   }
-
-  const {
-    id,
-    name,
-    image,
-    platforms,
-    description,
-    releaseDate,
-    rating,
-    genres,
-  } = videoGameDetail;
 
   return (
     <div>

@@ -21,7 +21,6 @@ router.get('/videogames', async (req, res) => {
   }
 });
 
-
 router.get('/videogames/:idVideogame', async (req, res) => {
   const { idVideogame } = req.params;
 
