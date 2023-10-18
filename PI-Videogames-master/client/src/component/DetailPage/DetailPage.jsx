@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchVideoGameDetail } from '../actions';
+import { fetchVideoGameDetail } from '../../actions/index';
 
 const DetailPage = ({ match }) => {
   const dispatch = useDispatch();

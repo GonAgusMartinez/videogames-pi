@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchVideoGameDetail, getVideoGames } from '../actions';
-import SearchBar from '../component/SearchBar';
-import Card from '../component/Card';
-import Paginado from '../component/Paginado';
+import { fetchVideoGameDetail, getVideoGames } from '../../actions/index';
+import SearchBar from '../SearchBar/SearchBar';
+import Card from '../Card/Card';
+import Paginado from '../Paginado/Paginado';
+import styles from '../HomePage/HomePage.module.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -34,8 +36,8 @@ const HomePage = () => {
   const currentGames = videoGames ? videoGames.slice(indexOfFirstGame, indexOfLastGame) : [];
 
   return (
-    <div>
-      <h1>Video Games</h1>
+    <div className={styles['homepage-container']}>
+      <h1 className={styles['title']}>VideoJuegos</h1>
       <SearchBar
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
@@ -46,7 +48,7 @@ const HomePage = () => {
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : (
-        <div>
+        <div className={styles['cards-container']}>
           {currentGames.length > 0 ? (
             currentGames.map((game) => (
               <Card key={game.id} game={game} />
@@ -64,6 +66,7 @@ const HomePage = () => {
           onPageChange={handlePageChange}
         />
       )}
+      <Link to="/form" className={styles['button-link']}>Crear Nuevo Videojuego</Link>
     </div>
   );
 };

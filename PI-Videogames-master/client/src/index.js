@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import LandingPage from './component/LandingPage';
-import HomePage from './component/HomePage';
-import DetailPage from './component/DetailPage';
-import FormPage from './component/FormPage';
+import LandingPage from './component/LandingPage/LandingPage';
+import HomePage from './component/HomePage/HomePage';
+import DetailPage from './component/DetailPage/DetailPage';
+import FormPage from './component/FormPage/FormPage';
 import store from './store';
 import './index.css'
 

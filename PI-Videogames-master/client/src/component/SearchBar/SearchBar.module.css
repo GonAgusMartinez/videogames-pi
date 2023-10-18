@@ -1,0 +1,43 @@
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(12, 13, 85);
+    padding: 20px;
+  }
+  
+  .input {
+    background-color: transparent;
+    border: 2px solid rgb(216, 0, 198);
+    color: rgb(216, 0, 198);
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .select {
+    background-color: transparent;
+    border: 2px solid rgb(216, 0, 198);
+    color: rgb(216, 0, 198);
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .button {
+    background-color: rgb(216, 0, 198);
+    color: rgb(12, 13, 85);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+  
+    &:hover {
+      background-color: rgb(12, 13, 85);
+      color: rgb(216, 0, 198);
+    }
+  }

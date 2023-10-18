@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import styles from '../Paginado/Paginado.module.css';
 
 const Paginado = ({ totalGames, gamesPerPage, currentPage, onPageChange }) => {
   const totalPages = Math.ceil(totalGames / gamesPerPage);
@@ -6,24 +7,27 @@ const Paginado = ({ totalGames, gamesPerPage, currentPage, onPageChange }) => {
 
   useEffect(() => {
     if (currentPage > totalPages) {
-      onPageChange(totalPages); 
+      onPageChange(totalPages);
     }
   }, [currentPage, totalPages, onPageChange]);
 
   return (
-    <div className="pagination">
+    <div className={styles['paginado-container']}>
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
+        className={currentPage === 1 ? styles['disabled'] : ''}
       >
         Anterior
       </button>
-      <div className="page-numbers">
+      <div className={styles['page-numbers']}>
         {pageNumbers.map((number) => (
           <button
             key={number}
             onClick={() => onPageChange(number)}
-            className={number === currentPage ? 'active' : ''}
+            className={`${styles['paginado-button']} ${
+              number === currentPage ? styles['active'] : ''
+            }`}
           >
             {number}
           </button>
@@ -32,6 +36,7 @@ const Paginado = ({ totalGames, gamesPerPage, currentPage, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
+        className={currentPage === totalPages ? styles['disabled'] : ''}
       >
         Siguiente
       </button>

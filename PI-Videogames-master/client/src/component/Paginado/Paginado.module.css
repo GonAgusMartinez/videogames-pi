@@ -1,0 +1,33 @@
+.paginado-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .paginado-button {
+    background-color: rgb(12, 13, 85);
+    color: rgb(216, 0, 198);
+    border: 2px solid rgb(216, 0, 198);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+  
+    &.active {
+      background-color: rgb(216, 0, 198);
+      color: rgb(12, 13, 85);
+    }
+  
+    &:hover {
+      background-color: rgb(216, 0, 198);
+      color: rgb(12, 13, 85);
+    }
+  
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
