@@ -1,0 +1,19 @@
+.card {
+    background-color: rgb(33, 36, 236);
+    color: rgb(99, 6, 91);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .img-container {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }

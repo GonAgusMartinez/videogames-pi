@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchVideoGameDetail } from '../../actions/index';
+import styles from '../DetailPage/DetailPage.module.css'
 
 const DetailPage = ({ match }) => {
   const dispatch = useDispatch();
@@ -13,21 +14,27 @@ const DetailPage = ({ match }) => {
   }, [dispatch, match.params.id]);
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return (
+      <div className={styles.loading}>Cargando...</div>
+    );
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className={styles.error}>Error: {error.message}</div>
+    );
   }
 
   if (!videoGameDetail) {
-    return <div>No se encontraron detalles del juego.</div>;
+    return (
+      <div className={styles.noDetails}>No se encontraron detalles del juego.</div>
+    );
   }
 
   return (
-    <div>
-      <h1>{name}</h1>
-      <img src={image} alt={name} />
+    <div className={styles.detailContainer}>
+      <h1 className={styles.title}>{name}</h1>
+      <img src={image} alt={name} className={styles.detailImage} />
       <p>ID: {id}</p>
       <p>Plataformas: {platforms.join(', ')}</p>
       <p>Descripción: {description}</p>

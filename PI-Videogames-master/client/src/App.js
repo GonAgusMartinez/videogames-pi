@@ -4,6 +4,7 @@ import LandingPage from './component/LandingPage';
 import HomePage from './component/HomePage';
 import DetailPage from './component/DetailPage';
 import FormPage from './component/FormPage';
+import Info from './component/Info/Info'
 import './app.css'; 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/home" component={HomePage} />
           <Route path="/detail/:id" component={DetailPage} />
           <Route path="/form" component={FormPage} />
+          <Route path="/Info" component={Info} />
         </Switch>
       </div>
     </BrowserRouter>

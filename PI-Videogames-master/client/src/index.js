@@ -5,6 +5,7 @@ import LandingPage from './component/LandingPage/LandingPage';
 import HomePage from './component/HomePage/HomePage';
 import DetailPage from './component/DetailPage/DetailPage';
 import FormPage from './component/FormPage/FormPage';
+import Info from './component/Info/Info'
 import store from './store';
 import './index.css'
 
@@ -16,7 +17,7 @@ ReactDOM.render(
         <Route path="/home" component={HomePage} />
         <Route path="/detail/:id" component={DetailPage} />
         <Route path="/form" component={FormPage} />
-        {/* Otras rutas */}
+        <Route path="/info" component={Info} />
       </Switch>
     </Router>
   </Provider>,

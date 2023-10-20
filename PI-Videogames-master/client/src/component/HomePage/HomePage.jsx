@@ -9,10 +9,11 @@ import styles from '../HomePage/HomePage.module.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { videoGames, loading, error } = useSelector((state) => state.videoGames);
+  const { videoGames: allVideoGames, loading, error } = useSelector((state) => state.videoGames);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const gamesPerPage = 15;
+  const [currentGames, setCurrentGames] = useState([]);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -27,13 +28,49 @@ const HomePage = () => {
     dispatch(getVideoGames(searchTerm));
   };
 
+  const handleFilterChange = (searchTerm, selectedGenre, sortBy, sortOrder) => {
+    if (allVideoGames) {
+      let filteredGames = [...allVideoGames];
+
+      if (selectedGenre !== 'all') {
+        filteredGames = filteredGames.filter((game) => {
+          return game.genres.includes(selectedGenre);
+        });
+      }
+
+      if (sortBy === 'name') {
+        filteredGames.sort((a, b) => {
+          if (sortOrder === 'asc') {
+            return a.name.localeCompare(b.name);
+          } else {
+            return b.name.localeCompare(a.name);
+          }
+        });
+      } else if (sortBy === 'rating') {
+        filteredGames.sort((a, b) => {
+          if (sortOrder === 'asc') {
+            return a.rating - b.rating;
+          } else {
+            return b.rating - a.rating;
+          }
+        });
+      }
+
+      setCurrentGames(filteredGames);
+    }
+  };
+
+  const handleSortChange = (searchTerm, selectedGenre, newSortBy, newSortOrder) => {
+    // Handle sorting logic here
+  };
+
   useEffect(() => {
     dispatch(fetchVideoGameDetail(currentPage, searchTerm));
   }, [dispatch, currentPage, searchTerm]);
 
-  const indexOfLastGame = videoGames ? Math.min(currentPage * gamesPerPage, videoGames.length) : 0;
+  const indexOfLastGame = currentGames ? Math.min(currentPage * gamesPerPage, currentGames.length) : 0;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
-  const currentGames = videoGames ? videoGames.slice(indexOfFirstGame, indexOfLastGame) : [];
+  const displayedGames = currentGames ? currentGames.slice(indexOfFirstGame, indexOfLastGame) : [];
 
   return (
     <div className={styles['homepage-container']}>
@@ -42,6 +79,8 @@ const HomePage = () => {
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
         onSearch={handleSearch}
+        onFilterChange={handleFilterChange}
+        onSortChange={handleSortChange}
       />
       {loading ? (
         <div>Cargando...</div>
@@ -49,8 +88,8 @@ const HomePage = () => {
         <div>Error: {error.message}</div>
       ) : (
         <div className={styles['cards-container']}>
-          {currentGames.length > 0 ? (
-            currentGames.map((game) => (
+          {displayedGames.length > 0 ? (
+            displayedGames.map((game) => (
               <Card key={game.id} game={game} />
             ))
           ) : (
@@ -58,15 +97,16 @@ const HomePage = () => {
           )}
         </div>
       )}
-      {currentGames.length > 0 && (
+      {displayedGames.length > 0 && (
         <Paginado
-          totalGames={videoGames ? videoGames.length : 0}
+          totalGames={currentGames ? currentGames.length : 0}
           gamesPerPage={gamesPerPage}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />
       )}
       <Link to="/form" className={styles['button-link']}>Crear Nuevo Videojuego</Link>
+      <Link to="/info" className={styles['button-link']}>Ir a la Página de Información</Link>
     </div>
   );
 };

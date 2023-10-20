@@ -50,9 +50,9 @@ const SearchBar = ({ onSearch, onFilterChange, onSortChange }) => {
         <option value="Arcade">Arcade</option>
         <option value="Platformer">Plataformas</option>
         <option value="Massively Multiplayer">Multijugador</option>
-        <option value="Racing">Carrearas</option>
+        <option value="Racing">Carreras</option>
         <option value="Sports">Deportes</option>
-        <option value="Fighting">Juegos de Pela</option>
+        <option value="Fighting">Juegos de Pelea</option>
         <option value="Family">Familiares</option>
         <option value="Board Games">Juegos de Mesa</option>
         <option value="Educational">Educativos</option>
