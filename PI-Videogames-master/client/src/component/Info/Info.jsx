@@ -48,7 +48,7 @@ espera de graduarme y comenzar a trabajar de este mundo tan espectacular en dond
         </p>
         <img
           src={process.env.PUBLIC_URL + '/Info/Foto.png'}
-          alt="Mi Imagen Personal"
+          alt="Gracias por leer"
           className={styles.personalImage}
         />
       </div>

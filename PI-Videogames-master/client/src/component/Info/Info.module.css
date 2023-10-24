@@ -3,7 +3,7 @@
   color: white;
   padding: 20px;
   text-align: center;
-  min-height: 100vh; /* Esto asegura que el fondo ocupe toda la pantalla */
+  min-height: 100vh; 
 }
 
 .pageDescription, .personalInfo {

@@ -9,15 +9,11 @@ import styles from '../HomePage/HomePage.module.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { videoGames: allVideoGames, loading, error } = useSelector((state) => state.videoGames);
+  const { allVideoGames, loading, error } = useSelector((state) => state.videoGames);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const gamesPerPage = 15;
   const [currentGames, setCurrentGames] = useState([]);
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -60,8 +56,30 @@ const HomePage = () => {
     }
   };
 
-  const handleSortChange = (searchTerm, selectedGenre, newSortBy, newSortOrder) => {
-    // Handle sorting logic here
+  const handleSortChange = (newSortBy, newSortOrder) => {
+    if (allVideoGames) {
+      let sortedGames = [...allVideoGames];
+  
+      if (newSortBy === 'name') {
+        sortedGames.sort((a, b) => {
+          if (newSortOrder === 'asc') {
+            return a.name.localeCompare(b.name);
+          } else {
+            return b.name.localeCompare(a.name);
+          }
+        });
+      } else if (newSortBy === 'rating') {
+        sortedGames.sort((a, b) => {
+          if (newSortOrder === 'asc') {
+            return a.rating - b.rating;
+          } else {
+            return b.rating - a.rating;
+          }
+        });
+      }
+
+      setCurrentGames(sortedGames);
+    }
   };
 
   useEffect(() => {
@@ -77,13 +95,13 @@ const HomePage = () => {
       <h1 className={styles['title']}>VideoJuegos</h1>
       <SearchBar
         searchTerm={searchTerm}
-        onSearchChange={handleSearchChange}
+        onSearchChange={setSearchTerm}
         onSearch={handleSearch}
         onFilterChange={handleFilterChange}
         onSortChange={handleSortChange}
       />
       {loading ? (
-        <div>Cargando...</div>
+        <div className={styles['purple-text']}>Cargando...</div>
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : (
@@ -93,7 +111,7 @@ const HomePage = () => {
               <Card key={game.id} game={game} />
             ))
           ) : (
-            <div>No se encontraron juegos</div>
+            <div className={styles['purple-text']}>No se encontraron juegos</div>
           )}
         </div>
       )}

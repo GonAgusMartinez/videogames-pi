@@ -15,10 +15,19 @@ const FormPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    if (name === "genres") {
+      const genresArray = value.split(',').map(genre => genre.trim());
+      setFormData({
+        ...formData,
+        [name]: genresArray,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const validateDescription = (description) => {
@@ -74,32 +83,8 @@ const FormPage = () => {
       return;
     }
 
-    if (!validateGenres(formData.genres)) {
+    if (!validateGenres(formData.genres.join(', '))) {
       alert('Géneros no válidos.');
-      return;
-    }
-
-    const allowedPlatforms = [
-      'PlayStation 5',
-      'Xbox Series S/X',
-      'PC',
-      'PlayStation 4',
-      'PlayStation 3',
-      'Xbox 360',
-      'Xbox One',
-      'PlayStation 2',
-      'PlayStation',
-      'Xbox',
-      'Nintendo Switch',
-      'Linux',
-      'macOS',
-      'Steam',
-    ];
-
-    const platforms = formData.platforms.split(',').map((p) => p.trim());
-    const invalidPlatforms = platforms.filter((p) => !allowedPlatforms.includes(p));
-    if (invalidPlatforms.length > 0) {
-      alert('Plataformas no válidas: ' + invalidPlatforms.join(', '));
       return;
     }
 

@@ -5,7 +5,7 @@ const apiKey = '270a83c9d3744dc0a02c2c679389b07f';
 export const getVideoGames = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`https://rawg.io/apidocs/videogames?key=${apiKey}`);
+      const response = await axios.get(`https://api.rawg.io/api/games?key=${apiKey}`);
       dispatch({
         type: 'GET_VIDEOGAMES',
         payload: response.data,
@@ -19,7 +19,7 @@ export const getVideoGames = () => {
 export const createVideoGame = (formData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`https://rawg.io/apidocs/videogames?key=${apiKey}`, formData);
+      const response = await axios.post(`https://api.rawg.io/api/games?key=${apiKey}`, formData);
       dispatch({
         type: 'CREATE_VIDEOGAME',
         payload: response.data,

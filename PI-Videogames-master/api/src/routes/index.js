@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { Videogame, Genre } = require('../db.js');
 const axios = require('axios');
+const { Op } = require("sequelize");
 require('dotenv').config();
 
 router.get('/videogames', async (req, res) => {
   try {
-    const apiResponse = await axios.get(`https://api.rawg.io/api/games?key=${process.env.api_key}`);
+    const apiResponse = await axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`);
     const apiGames = apiResponse.data.results;
 
     const dbGames = await Videogame.findAll({
@@ -25,7 +26,7 @@ router.get('/videogames/:idVideogame', async (req, res) => {
   const { idVideogame } = req.params;
 
   try {
-    const apiResponse = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${process.env.api_key}`);
+    const apiResponse = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${process.env.API_KEY}`);
     const apiGame = apiResponse.data;
 
     const dbGame = await Videogame.findOne({
@@ -38,7 +39,7 @@ router.get('/videogames/:idVideogame', async (req, res) => {
     } else if (dbGame) {
       res.json(dbGame);
     } else {
-      res.status(404).json({ message: 'juego no encontrado' });
+      res.status(404).json({ message: 'Juego no encontrado' });
     }
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener el juego' });
@@ -49,7 +50,7 @@ router.get('/videogames/name', async (req, res) => {
   const { search } = req.query;
 
   try {
-    const apiResponse = await axios.get(`https://api.rawg.io/api/games?key=${process.env.api_key}&search=${search}`);
+    const apiResponse = await axios.get(`https://api.rawg.io/api/games?search=${search}&key=${process.env.API_KEY}`);
     const apiGames = apiResponse.data.results;
 
     const dbGames = await Videogame.findAll({
@@ -95,7 +96,7 @@ router.post('/videogames', async (req, res) => {
 
 router.get('/genres', async (req, res) => {
   try {
-    const apiResponse = await axios.get(`https://api.rawg.io/api/genres?key=${process.env.api_key}`);
+    const apiResponse = await axios.get(`https://api.rawg.io/api/genres?key=${process.env.API_KEY}`);
     const apiGenres = apiResponse.data.results;
 
     const dbGenres = await Genre.findAll();
