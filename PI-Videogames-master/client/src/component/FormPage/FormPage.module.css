@@ -1,15 +1,32 @@
 .formpage-container {
   background-color: rgb(12, 13, 85);
-  padding: 20px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   min-height: 100vh;
-  color: rgb(12, 13, 85); 
+  color: rgb(12, 13, 85);
+  padding: 20px;
+}
+
+.left-content {
+  flex: 1;
+  text-align: left;
+  padding: 100px;
+}
+
+.right-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .form-title {
   font-size: 36px;
-  color: rgb(216, 0, 198); 
-  margin-bottom: 20px;
+  color: rgb(216, 0, 198);
+  text-align: left; 
+  margin-top: 0%;
 }
 
 .form-button {
@@ -26,18 +43,25 @@
 .form-button:hover {
   background-color: rgb(216, 0, 198);
   color: rgb(12, 13, 85);
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 .form-text {
   color: rgb(12, 13, 85);
-  background-color: rgb(216, 0, 198); 
+  background-color: rgb(216, 0, 198);
   padding: 5px;
 }
 
 .form-label {
-  color: rgb(216, 0, 198); 
-  margin-bottom: 10px; 
-  display: block; 
-  width: 100%; 
+  color: rgb(216, 0, 198);
+  margin-bottom: 10px;
+  display: block;
+  width: 100%;
+}
+
+.forma-page-image {
+  max-width: 45%;
+  height: auto;
+  max-height: 45%;
+  width: auto;
 }

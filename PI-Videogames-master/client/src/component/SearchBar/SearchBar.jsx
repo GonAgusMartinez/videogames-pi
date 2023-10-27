@@ -36,8 +36,9 @@ const SearchBar = ({ onSearch, onFilterChange, onSortChange }) => {
         value={searchTerm}
         onChange={handleSearchChange}
       />
-      <select className={styles.select} value={selectedGenre} onChange={handleGenreChange}>
-      <option value="all">Todos los géneros</option>
+      <div className={styles['select-container']}>
+        <select className={styles.select} value={selectedGenre} onChange={handleGenreChange}>
+        <option value="all">Todos los géneros</option>
         <option value="Action">Acción</option>
         <option value="Indie">Indie</option>
         <option value="Adventure">Aventura</option>
@@ -57,13 +58,15 @@ const SearchBar = ({ onSearch, onFilterChange, onSortChange }) => {
         <option value="Board Games">Juegos de Mesa</option>
         <option value="Educational">Educativos</option>
         <option value="Card">Juegos de Cartas</option>
-      </select>
-      <select className={styles.select} value={`${sortBy}-${sortOrder}`} onChange={handleSortChange}>
-      <option value="name-asc">Nombre (A-Z)</option>
+        <option value="Creados">Creados</option>
+        </select>
+        <select className={styles.select} value={`${sortBy}-${sortOrder}`} onChange={handleSortChange}>
+        <option value="name-asc">Nombre (A-Z)</option>
         <option value="name-desc">Nombre (Z-A)</option>
         <option value="rating-asc">Rating (Ascendente)</option>
         <option value="rating-desc">Rating (Descendente)</option>
-      </select>
+        </select>
+      </div>
       <button className={styles.button} onClick={handleSearch}>
         Buscar
       </button>

@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-const apiKey = '270a83c9d3744dc0a02c2c679389b07f';
 
 export const getVideoGames = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`https://api.rawg.io/api/games?key=${apiKey}`);
+      const response = await axios.get(`https://api.rawg.io/api/games?key=270a83c9d3744dc0a02c2c679389b07f`);
       dispatch({
         type: 'GET_VIDEOGAMES',
         payload: response.data,
@@ -19,7 +18,7 @@ export const getVideoGames = () => {
 export const createVideoGame = (formData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`https://api.rawg.io/api/games?key=${apiKey}`, formData);
+      const response = await axios.post(`https://api.rawg.io/api/games?key=270a83c9d3744dc0a02c2c679389b07f`, formData);
       dispatch({
         type: 'CREATE_VIDEOGAME',
         payload: response.data,
@@ -33,7 +32,7 @@ export const createVideoGame = (formData) => {
 export const fetchVideoGameDetail = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${apiKey}`);
+      const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=270a83c9d3744dc0a02c2c679389b07f`);
 
       if (response.status === 200) {
         const videoGameData = response.data;

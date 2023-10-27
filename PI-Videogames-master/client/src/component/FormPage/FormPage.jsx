@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './FormPage.module.css';
+import Formpage from '../FormPage/Formpage.png';
 
 const FormPage = () => {
   const [formData, setFormData] = useState({
@@ -48,7 +49,6 @@ const FormPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (
       formData.name === '' ||
       formData.image === '' ||
@@ -91,86 +91,106 @@ const FormPage = () => {
     alert('Juego creado');
   };
 
+
   return (
     <div className={styles['formpage-container']}>
-      <h1 className={styles['form-title']}>Crear Nuevo Videojuego</h1>
-      <form onSubmit={handleSubmit}>
-        <label className={styles['form-label']}>
-          Nombre:
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            className={styles['form-text']}
-          />
-        </label>
-        <label className={styles['form-label']}>
-          Imagen (URL):
-          <input
-            type="text"
-            name="image"
-            value={formData.image}
-            onChange={handleInputChange}
-            className={styles['form-text']}
-          />
-        </label>
-        <label className={styles['form-label']}>
-          Descripción:
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-            className={styles['form-text']}
-          />
-        </label>
-        <label className={styles['form-label']}>
-          Plataformas:
-          <input
-            type="text"
-            name="platforms"
-            value={formData.platforms}
-            onChange={handleInputChange}
-            className={styles['form-text']}
-          />
-        </label>
-        <label className={styles['form-label']}>
-          Fecha de Lanzamiento:
-          <input
-            type="date"
-            name="releaseDate"
-            value={formData.releaseDate}
-            onChange={handleInputChange}
-            className={styles['form-text']}
-          />
-        </label>
-        <label className={styles['form-label']}>
-          Rating:
-          <input
-            type="number"
-            name="rating"
-            value={formData.rating}
-            onChange={handleInputChange}
-            className={styles['form-text']}
-          />
-        </label>
-        <label className={styles['form-label']}>
-          Géneros (separados por comas):
-          <input
-            type="text"
-            name="genres"
-            value={formData.genres.join(', ')}
-            onChange={handleInputChange}
-            className={styles['form-text']}
-          />
-        </label>
+      <div className={styles['left-content']}>
+        <h1 className={styles['form-title']}>Crea tu Videojuego</h1>
+        <form onSubmit={handleSubmit}>
+        <div className={styles['form-label']}>
+          <label>
+            Nombre:
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className={styles['form-text']}
+            />
+          </label>
+        </div>
+        <div className={styles['form-label']}>
+          <label>
+            Imagen (URL):
+            <input
+              type="text"
+              name="image"
+              value={formData.image}
+              onChange={handleInputChange}
+              className={styles['form-text']}
+            />
+          </label>
+        </div>
+        <div className={styles['form-label']}>
+          <label>
+            Descripción:
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              className={styles['form-text']}
+            />
+          </label>
+        </div>
+        <div className={styles['form-label']}>
+          <label>
+            Plataformas:
+            <input
+              type="text"
+              name="platforms"
+              value={formData.platforms}
+              onChange={handleInputChange}
+              className={styles['form-text']}
+            />
+          </label>
+        </div>
+        <div className={styles['form-label']}>
+          <label>
+            Fecha de Lanzamiento:
+            <input
+              type="date"
+              name="releaseDate"
+              value={formData.releaseDate}
+              onChange={handleInputChange}
+              className={styles['form-text']}
+            />
+          </label>
+        </div>
+        <div className={styles['form-label']}>
+          <label>
+            Rating:
+            <input
+              type="number"
+              name="rating"
+              value={formData.rating}
+              onChange={handleInputChange}
+              className={styles['form-text']}
+            />
+          </label>
+        </div>
+        <div className={styles['form-label']}>
+          <label>
+            Géneros (separados por comas):
+            <input
+              type="text"
+              name="genres"
+              value={formData.genres.join(', ')}
+              onChange={handleInputChange}
+              className={styles['form-text']}
+            />
+          </label>
+        </div>
         <button type="submit" className={styles['form-button']}>
-          Crear Videojuego
+          Crear
         </button>
-      </form>
-      <Link to="/home" className={styles['form-button']}>
-        Volver a la Página de Inicio
-      </Link>
+        </form>
+        <Link to="/home" className={styles['form-button']}>
+          Inicio
+        </Link>
+      </div>
+      <div className={styles['right-content']}>
+        <img src={Formpage} alt="FormaPage" className={styles['forma-page-image']} />
+      </div>
     </div>
   );
 };

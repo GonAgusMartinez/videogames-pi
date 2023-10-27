@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchVideoGameDetail, getVideoGames } from '../../actions/index';
 import SearchBar from '../SearchBar/SearchBar';
 import Card from '../Card/Card';
+import Loading from '../Loading/Loading';
+import Error404 from '../Error 404/Error404'; 
 import Paginado from '../Paginado/Paginado';
 import styles from '../HomePage/HomePage.module.css';
 
@@ -59,7 +61,7 @@ const HomePage = () => {
   const handleSortChange = (newSortBy, newSortOrder) => {
     if (allVideoGames) {
       let sortedGames = [...allVideoGames];
-  
+
       if (newSortBy === 'name') {
         sortedGames.sort((a, b) => {
           if (newSortOrder === 'asc') {
@@ -83,8 +85,12 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    console.log("Fetching video game detail...");
     dispatch(fetchVideoGameDetail(currentPage, searchTerm));
-  }, [dispatch, currentPage, searchTerm]);
+    console.log("allVideoGames:", allVideoGames);
+    console.log("loading:", loading);
+    console.log("error:", error);
+  }, [dispatch, currentPage, searchTerm, allVideoGames, loading, error]);
 
   const indexOfLastGame = currentGames ? Math.min(currentPage * gamesPerPage, currentGames.length) : 0;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
@@ -92,7 +98,13 @@ const HomePage = () => {
 
   return (
     <div className={styles['homepage-container']}>
-      <h1 className={styles['title']}>VideoJuegos</h1>
+      <div className={styles['top-container']}>
+        <h1 className={styles['title']}>GameOn</h1>
+        <div className={styles['buttons-container']}>
+          <Link to="/form" className={styles['button-link']}>Crear</Link>
+          <Link to="/info" className={styles['button-link']}>Info</Link>
+        </div>
+      </div>
       <SearchBar
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
@@ -101,18 +113,17 @@ const HomePage = () => {
         onSortChange={handleSortChange}
       />
       {loading ? (
-        <div className={styles['purple-text']}>Cargando...</div>
+        <Loading />
       ) : error ? (
-        <div>Error: {error.message}</div>
+        <Error404 />
       ) : (
         <div className={styles['cards-container']}>
           {displayedGames.length > 0 ? (
             displayedGames.map((game) => (
               <Card key={game.id} game={game} />
             ))
-          ) : (
-            <div className={styles['purple-text']}>No se encontraron juegos</div>
-          )}
+          ) : null
+          }
         </div>
       )}
       {displayedGames.length > 0 && (
@@ -123,8 +134,6 @@ const HomePage = () => {
           onPageChange={handlePageChange}
         />
       )}
-      <Link to="/form" className={styles['button-link']}>Crear Nuevo Videojuego</Link>
-      <Link to="/info" className={styles['button-link']}>Ir a la Página de Información</Link>
     </div>
   );
 };

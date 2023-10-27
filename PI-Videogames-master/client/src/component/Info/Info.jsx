@@ -1,58 +1,56 @@
 import React from 'react';
 import styles from '../Info/Info.module.css';
-import Foto from '../Info/Foto.png'
+import Foto from '../Info/Foto.png';
+import Fondo from '../Info/Fondo .mp4'; 
 
 const Info = () => {
   return (
     <div className={styles.infoContainer}>
-      <div className={styles.pageDescription}>
-        <h1>Descripción de la Página</h1>
-        <p>
-Bienvenido a nuestro espacio dedicado a los videojuegos,  Esta página está diseñada para todos los amantes de los videojuegos, desde jugadores casuales hasta fanáticos ávidos.
-
-Características Principales:
-
-Búsqueda de Juegos: Utiliza nuestra barra de búsqueda para encontrar tus juegos favoritos. Filtra por nombre, género, plataforma y más.
-
-Exploración de Juegos: Descubre una amplia variedad de juegos, desde emocionantes aventuras hasta desafiantes juegos de estrategia.
-
-Información Detallada: Accede a información detallada sobre cada juego, incluyendo su descripción, fecha de lanzamiento, calificación y género.
-
-Creación de Juegos: ¿Eres un desarrollador de juegos? ¡Puedes agregar tus propios juegos a nuestra base de datos!
-
-Nuestra Misión:
-
-Nuestra misión es brindar un lugar donde la comunidad de jugadores pueda conectarse, explorar nuevos títulos y compartir sus pensamientos y pasión por los videojuegos.
-
-Así que, ¿qué estás esperando? ¡Comienza tu viaje para explorar el mundo de los videojuegos ahora! Siéntete libre de unirte a nuestra comunidad, buscar tus juegos favoritos y disfrutar de una experiencia llena de diversión y emoción.
-
-Nota: Esta página está en constante desarrollo, y estamos emocionados de recibir tus comentarios y sugerencias para mejorar tu experiencia.
-        </p>
+      <video autoPlay loop muted className={styles.backgroundVideo}>
+        <source src={Fondo} type="video/mp4" />
+      </video>
+      <div className={styles.content}>
+        <div className={styles.pageDescription}>
+          <h1 style={{ color: 'rgb(21, 23, 165)' }}>Descripción de la Página</h1>
+          <div className={styles.textContainer}>
+            <p>
+              Bienvenido a nuestro espacio dedicado a los videojuegos. Esta página está diseñada para todos los amantes de los videojuegos, desde jugadores casuales hasta fanáticos ávidos, aqui tienes:
+            </p>
+            <p>
+              Búsqueda de Juegos: Utiliza nuestra barra de búsqueda para encontrar tus juegos favoritos. Filtra por nombre, género, plataforma y más.
+            </p>
+            <p>
+              Información Detallada: Accede a información detallada sobre cada juego, incluyendo su descripción, fecha de lanzamiento, calificación y género.
+            </p>
+            <p>
+              Creación de Juegos: ¿Eres un desarrollador de juegos? ¡Puedes agregar tus propios juegos a nuestra base de datos!
+            </p>
+            <p>
+              Nuestra Misión:
+            </p>
+            <p>
+              Nuestra misión es brindar un lugar donde la comunidad de jugadores pueda conectarse, explorar nuevos títulos y compartir sus pensamientos y pasión por los videojuegos.
+            </p>
+          </div>
+        </div>
+        <div className={styles.personalInfo}>
+          <h1 style={{ color: 'rgb(21, 23, 165)' }}>Mi Experiencia Personal</h1>
+          <div className={styles.textContainer}>
+            <p>
+              Hola, yo soy Gonzalo Agustín Martínez y quiero contarte mi historia con Henry.
+            </p>
+            <p>
+              Teniendo tan solo 20 años, estaba decidido a estudiar programación en distintos ámbitos de la misma, pero no sabía dónde específicamente. Hace bastante tiempo, estando en un colectivo de vuelta a casa, se dio una charla con un egresado de Henry en donde me explicó cómo se estudiaba y trabajaba dentro de la institución, a su vez recomendando que comenzara a estudiar allí a pesar de que no tuviera mucho conocimiento en el área. Así fue como descubrí Henry y comencé con el prepcourse. Finalmente, logré aprobarlo y comenzar mi carrera. Hoy en día, después de aprobar los diversos checkpoint (pruebas intermedias), me encuentro en el desarrollo de esta página y a la espera de graduarme y comenzar a trabajar en este mundo tan espectacular en el que me desempeño, la programación.
+            </p>
+          </div>
+          <img
+            src={Foto}
+            alt="Foto de Gonzalo Agustín Martínez"
+            className={styles.personalImage}
+          />
+        </div>
+        <a href="/home" className={styles.homeButton}>Volver a la Página de Inicio</a>
       </div>
-      <div className={styles.personalInfo}>
-        <h1>Mi Experiencia Personal</h1>
-        <img
-          className={styles['img-container']}
-          src={Foto} 
-          alt="Descripción de la imagen" 
-        />
-        <p>
-Hola yo soy Gonzalo Agustin Martinez y quiero contarte mi historia con Henry.
-
-Teniendo tan solo 20 años estaba decidido a estudiar programacion en distintos ambitos de la misma, pero no sabia donde especificamente
-ya hace bastante tiempo estando en un colectivo de vuelta a casa se dio una charla con un egresado de Henry en donde me explico como se
-estudiaba y trabaja dentro de la institucion, a su vez recomendando que comenzara a estudiar alli a pesar de que no tubiera mucho 
-conocimiento en el area, asi fue como descubri Henry y comenzando con el prepcourse, finalmente consegui aprobarlo y empezar mi carrera
-hoy en dia luego de aprobar los diversos checkpoint (Pruebas intermediarias) hoy me encuentro en el desarrollo de esta pagina y a la 
-espera de graduarme y comenzar a trabajar de este mundo tan espectacular en donde me desempeño, la programacion.
-        </p>
-        <img
-          src={process.env.PUBLIC_URL + '/Info/Foto.png'}
-          alt="Gracias por leer"
-          className={styles.personalImage}
-        />
-      </div>
-      <a href="/home" className={styles.homeButton}>Volver a la Página de Inicio</a>
     </div>
   );
 };

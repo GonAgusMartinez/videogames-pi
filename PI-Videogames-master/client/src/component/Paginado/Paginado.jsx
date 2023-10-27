@@ -16,7 +16,7 @@ const Paginado = ({ totalGames, gamesPerPage, currentPage, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className={currentPage === 1 ? styles['disabled'] : ''}
+        className={currentPage === 1 ? styles['disabled'] : styles['purple-button']} 
       >
         Anterior
       </button>
@@ -36,7 +36,7 @@ const Paginado = ({ totalGames, gamesPerPage, currentPage, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={currentPage === totalPages ? styles['disabled'] : ''}
+        className={currentPage === totalPages ? styles['disabled'] : styles['purple-button']} 
       >
         Siguiente
       </button>
