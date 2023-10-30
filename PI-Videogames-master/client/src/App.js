@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import LandingPage from './component/LandingPage';
-import HomePage from './component/HomePage';
-import DetailPage from './component/DetailPage';
-import FormPage from './component/FormPage';
-import Info from './component/Info/Info'
-import './app.css'; 
+import LandingPage from './component/LandingPage/LandingPage';
+import HomePage from './component/HomePage/HomePage';
+import DetailPage from './component/DetailPage/DetailPage';
+import FormPage from './component/FormPage/FormPage';
+import Info from './component/Info/Info';
+import Error404 from './component/Error 404/Error404'; 
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="/detail/:id" component={DetailPage} />
           <Route path="/form" component={FormPage} />
           <Route path="/Info" component={Info} />
+          <Route component={Error404} />
         </Switch>
       </div>
     </BrowserRouter>

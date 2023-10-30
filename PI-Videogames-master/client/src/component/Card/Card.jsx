@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import styles from '../Card/Card.module.css'; 
 
-function Card({ game }) {
+export default function Card(props) {
+  const { name, image, genres } = props;
+
   return (
-    <li key={game.id}>
-      <img src={game.image} alt={game.name} />
-      <h3>{game.name}</h3>
-      <p>Géneros: {game.genres.join(', ')}</p>
-    </li>
+    <div className={styles.card}>
+      <img src={image} alt={name} />
+      <h3>{name}</h3>
+      <p>Géneros: {genres.join(', ')}</p>
+      <Link to={`/detail/:id`}>Ver detalles</Link>
+    </div>
   );
 }
-
-export default Card;

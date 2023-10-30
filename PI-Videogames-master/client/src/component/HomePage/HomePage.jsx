@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'; //
 import SearchBar from '../SearchBar/SearchBar';
 import Card from '../Card/Card';
 import Loading from '../Loading/Loading';
@@ -83,6 +83,11 @@ const HomePage = () => {
     }
   };
 
+  console.log('card:', Card);
+  console.log('loading:', Loading);
+  console.log('error:', Error404);
+  console.log('paginado:', Paginado);
+
   const indexOfLastGame = currentGames ? Math.min(currentPage * gamesPerPage, currentGames.length) : 0;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const displayedGames = currentGames ? currentGames.slice(indexOfFirstGame, indexOfLastGame) : [];
@@ -124,6 +129,9 @@ const HomePage = () => {
           onPageChange={handlePageChange}
         />
       )}
+      <Link to="/detail/1" className={styles['button-link']}>
+        Ir a la DetailPage
+      </Link>
     </div>
   );
 };
