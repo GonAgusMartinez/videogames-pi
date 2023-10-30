@@ -1,34 +1,30 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {getVideogames,} from '../../actions/index'; 
-import styles from '../DetailPage/DetailPage.module.css';
+import { getVideogames } from '../../actions/index';
+import Loading from '../Loading/Loading';
+import Error404 from '../Error 404/Error404';
+import styles from './DetailPage.module.css';
 
 const DetailPage = ({ match }) => {
   const dispatch = useDispatch();
-  const { videoGameDetail, loading, error } = useSelector((state) => state.videoGameDetail);
+  const { videoGameDetail, loading, error } = useSelector((state) => state);
   const { id, name, image, platforms, description, releaseDate, rating, genres } = videoGameDetail || {};
 
   useEffect(() => {
     const videoGameId = match.params.id;
-    dispatch(getVideogames(videoGameId)); 
+    dispatch(getVideogames(videoGameId));
   }, [dispatch, match.params.id]);
 
   if (loading) {
-    return (
-      <div className={styles.loading}>Cargando...</div>
-    );
+    return <Loading />;
   }
 
   if (error) {
-    return (
-      <div className={styles.error}>Error: {error.message}</div>
-    );
+    return <Error404 message={`Error: ${error.message}`} />;
   }
 
   if (!videoGameDetail) {
-    return (
-      <div className={styles.noDetails}>No se encontraron detalles del juego.</div>
-    );
+    return <Error404 message="No se encontraron detalles del juego." />;
   }
 
   return (

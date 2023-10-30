@@ -87,6 +87,8 @@ const HomePage = () => {
   console.log('loading:', Loading);
   console.log('error:', Error404);
   console.log('paginado:', Paginado);
+  console.log('currentGames:', currentGames);
+  console.log (HomePage)
 
   const indexOfLastGame = currentGames ? Math.min(currentPage * gamesPerPage, currentGames.length) : 0;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
@@ -115,10 +117,14 @@ const HomePage = () => {
       ) : (
         <div className={styles['cards-container']}>
           {displayedGames.length > 0 ? (
-            displayedGames.map((game) => (
-              <Card key={game.id} game={game} />
-            ))
-          ) : null}
+            displayedGames.map
+            ((game) => {
+              console.log('game:', game);
+             return <Card key={
+            game.id
+            } game={game} />;
+                 })
+               ) : null}
         </div>
       )}
       {displayedGames.length > 0 && (

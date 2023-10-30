@@ -6,9 +6,8 @@ require('dotenv').config();
 
 router.get('/', async (req, res) => {
   try {
-    const apiKey = process.env.API_KEY;
 
-    const apiResponse = await axios.get(`https://api.rawg.io/api/games?key=${apiKey}`);
+    const apiResponse = await axios.get(`https://api.rawg.io/api/developers?key=270a83c9d3744dc0a02c2c679389b07f`);
     const apiGames = apiResponse.data.results;
 
     const dbGames = await Videogame.findAll({
