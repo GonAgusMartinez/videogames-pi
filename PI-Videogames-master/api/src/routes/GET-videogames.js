@@ -2,14 +2,17 @@ const express = require('express');
 const router = express.Router();
 const { Videogame, Genre } = require('../db.js');
 const axios = require('axios');
+require('dotenv').config();
 
 router.get('/', async (req, res) => {
   try {
-    const apiResponse = await axios.get(`https://api.rawg.io/api/games?key=270a83c9d3744dc0a02c2c679389b07f`);
+    const apiKey = process.env.API_KEY;
+
+    const apiResponse = await axios.get(`https://api.rawg.io/api/games?key=${apiKey}`);
     const apiGames = apiResponse.data.results;
 
     const dbGames = await Videogame.findAll({
-      include: Genre, 
+      include: Genre,
     });
 
     const allGames = apiGames.concat(dbGames);

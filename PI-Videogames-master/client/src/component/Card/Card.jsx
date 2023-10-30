@@ -1,16 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../Card/Card.module.css'; 
 
-const Card = ({ game }) => {
+function Card({ game }) {
   return (
-    <div className={styles.card}>
+    <li key={game.id}>
       <img src={game.image} alt={game.name} />
-      <h2 className={styles.cardTitle}>{game.name}</h2>
-      <p className={styles.cardGenres}>Genres: {game.genres.join(', ')}</p>
-      <Link to={`/detail/${game.id}`} className={styles.cardLink}>Ver detalles</Link>
-    </div>
+      <h3>{game.name}</h3>
+      <p>Géneros: {game.genres.join(', ')}</p>
+    </li>
   );
-};
+}
 
 export default Card;

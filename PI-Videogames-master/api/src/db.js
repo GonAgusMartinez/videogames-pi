@@ -2,13 +2,17 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_NAME, 
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
-  logging: false, 
-  native: false, 
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+  logging: false,
+  native: false,
 });
 const basename = path.basename(__filename);
 
@@ -20,17 +24,20 @@ fs.readdirSync(path.join(__dirname, '/models'))
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
-modelDefiners.forEach(model => model(sequelize));
+modelDefiners.forEach((model) => model(sequelize));
 
 let entries = Object.entries(sequelize.models);
-let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
+let capsEntries = entries.map((entry) => [
+  entry[0][0].toUpperCase() + entry[0].slice(1),
+  entry[1],
+]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Videogame, Genre } = sequelize.models; 
+const { Videogame, Genre } = sequelize.models;
 
 Videogame.belongsToMany(Genre, { through: 'VideoGame-Genres' });
 
 module.exports = {
-  ...sequelize.models, 
-  conn: sequelize,     
+  ...sequelize.models,
+  conn: sequelize,
 };

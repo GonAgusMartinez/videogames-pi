@@ -3,11 +3,14 @@ const { Op } = require('sequelize');
 const router = express.Router();
 const { Videogame, Genre } = require('../db.js');
 const axios = require('axios');
+require('dotenv').config();
 
 router.get('/videogames/name', async (req, res) => {
   const { search } = req.query;
 
   try {
+    const apiKey = process.env.API_KEY;
+
     const dbGames = await Videogame.findAll({
       where: {
         name: {
@@ -15,10 +18,10 @@ router.get('/videogames/name', async (req, res) => {
         },
       },
       include: Genre,
-      limit: 15, 
+      limit: 15,
     });
 
-    const apiResponse = await axios.get(`https://api.rawg.io/api/games?search=${search}&key=270a83c9d3744dc0a02c2c679389b07f`);
+    const apiResponse = await axios.get(`https://api.rawg.io/api/games?search=${search}&key=${apiKey}`);
     const apiGames = apiResponse.data.results;
 
     const allGames = dbGames.concat(apiGames);

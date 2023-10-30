@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchVideoGameDetail, getVideoGames } from '../../actions/index';
 import SearchBar from '../SearchBar/SearchBar';
 import Card from '../Card/Card';
 import Loading from '../Loading/Loading';
 import Error404 from '../Error 404/Error404'; 
 import Paginado from '../Paginado/Paginado';
-import styles from '../HomePage/HomePage.module.css';
+import styles from '../HomePage/HomePage.module.css'; 
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { allVideoGames, loading, error } = useSelector((state) => state.videoGames);
+  const { videoGames, loading, error } = useSelector((state) => state);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const gamesPerPage = 15;
@@ -23,12 +22,12 @@ const HomePage = () => {
 
   const handleSearch = () => {
     setCurrentPage(1);
-    dispatch(getVideoGames(searchTerm));
+    dispatch(videoGames(searchTerm));
   };
 
-  const handleFilterChange = (searchTerm, selectedGenre, sortBy, sortOrder) => {
-    if (allVideoGames) {
-      let filteredGames = [...allVideoGames];
+  const handleFilterChange = (selectedGenre, sortBy, sortOrder) => {
+    if (videoGames) {
+      let filteredGames = [...videoGames];
 
       if (selectedGenre !== 'all') {
         filteredGames = filteredGames.filter((game) => {
@@ -59,8 +58,8 @@ const HomePage = () => {
   };
 
   const handleSortChange = (newSortBy, newSortOrder) => {
-    if (allVideoGames) {
-      let sortedGames = [...allVideoGames];
+    if (videoGames) {
+      let sortedGames = [...videoGames];
 
       if (newSortBy === 'name') {
         sortedGames.sort((a, b) => {
@@ -83,14 +82,6 @@ const HomePage = () => {
       setCurrentGames(sortedGames);
     }
   };
-
-  useEffect(() => {
-    console.log("Fetching video game detail...");
-    dispatch(fetchVideoGameDetail(currentPage, searchTerm));
-    console.log("allVideoGames:", allVideoGames);
-    console.log("loading:", loading);
-    console.log("error:", error);
-  }, [dispatch, currentPage, searchTerm, allVideoGames, loading, error]);
 
   const indexOfLastGame = currentGames ? Math.min(currentPage * gamesPerPage, currentGames.length) : 0;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
@@ -122,8 +113,7 @@ const HomePage = () => {
             displayedGames.map((game) => (
               <Card key={game.id} game={game} />
             ))
-          ) : null
-          }
+          ) : null}
         </div>
       )}
       {displayedGames.length > 0 && (

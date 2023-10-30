@@ -1,50 +1,45 @@
-import axios from 'axios';
-
-
-export const getVideoGames = () => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(`https://api.rawg.io/api/games?key=270a83c9d3744dc0a02c2c679389b07f`);
-      dispatch({
-        type: 'GET_VIDEOGAMES',
-        payload: response.data,
+export function getVideogames() {
+  return function (dispatch) {
+    return fetch(`http://localhost:3001/videogames`)
+      .then(response => response.json())
+      .then(json => {
+        dispatch({ type: "GET_VIDEOGAMES", payload: json });
       });
-    } catch (error) {
-      console.error('Error al obtener la lista de videojuegos:', error);
-    }
   };
-};
+}
 
-export const createVideoGame = (formData) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(`https://api.rawg.io/api/games?key=270a83c9d3744dc0a02c2c679389b07f`, formData);
-      dispatch({
-        type: 'CREATE_VIDEOGAME',
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error('Error al crear el videojuego:', error);
-    }
-  };
-};
-
-export const fetchVideoGameDetail = (id) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=270a83c9d3744dc0a02c2c679389b07f`);
-
-      if (response.status === 200) {
-        const videoGameData = response.data;
+export function searchVideogames(name) {
+  return (dispatch) =>
+    fetch(`http://localhost:3001/videogames?name=${name}`)
+      .then((resp) => resp.json())
+      .then((json) => {
         dispatch({
-          type: 'FETCH_VIDEOGAME_DETAIL',
-          payload: videoGameData,
+          type: "SEARCH_VIDEOGAMES",
+          payload: json,
         });
-      } else {
-        console.error('Error al obtener los detalles del juego. El servidor respondió con estado:', response.status);
-      }
-    } catch (error) {
-      console.error('Error en la solicitud de la API al obtener detalles del juego:', error);
-    }
-  };
-};
+      });
+}
+
+export function getVideogameById(id) {
+  return (dispatch) =>
+    fetch(`http://localhost:3001/videogame/${id}`)
+      .then((resp) => resp.json())
+      .then((json) => {
+        dispatch({
+          type: "GET_VIDEOGAME_BY_ID",
+          payload: json,
+        });
+      });
+}
+
+export function getGenres() {
+  return (dispatch) =>
+    fetch(`http://localhost:3001/genres`)
+      .then((resp) => resp.json())
+      .then((json) => {
+        dispatch({
+          type: "GET_GENRES",
+          payload: json,
+        });
+      });
+}

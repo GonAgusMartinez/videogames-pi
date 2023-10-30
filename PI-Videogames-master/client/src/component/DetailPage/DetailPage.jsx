@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchVideoGameDetail } from '../../actions/index';
-import styles from '../DetailPage/DetailPage.module.css'
+import {getVideogames,} from '../../actions/index'; 
+import styles from '../DetailPage/DetailPage.module.css';
 
 const DetailPage = ({ match }) => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const DetailPage = ({ match }) => {
 
   useEffect(() => {
     const videoGameId = match.params.id;
-    dispatch(fetchVideoGameDetail(videoGameId));
+    dispatch(getVideogames(videoGameId)); 
   }, [dispatch, match.params.id]);
 
   if (loading) {

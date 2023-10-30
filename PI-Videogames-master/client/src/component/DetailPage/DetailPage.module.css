@@ -1,43 +1,58 @@
+body {
+  background-image: url('../DetailPage/Fondo.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+}
+
 .detailContainer {
-    background-color: rgb(12, 13, 85);
-    color: rgb(216, 0, 198);
-    padding: 20px;
-    border-radius: 10px;
-    margin: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  }
-  
-  .detailImage {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .loading {
-    background-color: rgb(12, 13, 85);
-    color: rgb(216, 0, 198);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  }
-  
-  .error {
-    background-color: rgb(12, 13, 85);
-    color: rgb(216, 0, 198);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  }
-  
-  .noDetails {
-    background-color: rgb(12, 13, 85);
-    color: rgb(216, 0, 198);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  }
+  background-color: rgba(12, 13, 85, 0.8); 
+  color: rgb(216, 0, 198);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: relative; 
+  z-index: 1; 
+}
+
+.detailImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.loading {
+  background-color: rgba(12, 13, 85, 0.8); 
+  color: rgb(216, 0, 198);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: relative; 
+  z-index: 1; 
+}
+
+.error {
+  background-color: rgba(12, 13, 85, 0.8); 
+  color: rgb(216, 0, 198);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: relative; 
+  z-index: 1; 
+}
+
+.noDetails {
+  background-color: rgba(12, 13, 85, 0.8); 
+  color: rgb(216, 0, 198);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: relative; 
+  z-index: 1; 
+}
